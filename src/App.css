@@ -30,15 +30,29 @@
 
 .container {
 	width: 100%;
-  max-width: 1380px;
-  margin: 0 auto;
+	max-width: 1380px;
+	margin: 0 auto;
 }
 
 section {
+	position: relative;
 	background-color: #092685;
 	color: #fff;
 	padding: 100px 0;
 	text-align: left;
+  overflow: hidden;
+}
+section:before {
+	content: 'SOME SECTION BACKGROUND';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translate(-50%, -50%) rotate(30deg);
+  font-size: 100px;
+  filter: blur(9px);
 }
 section * {
 	margin: 0;
@@ -56,7 +70,7 @@ section h3 {
 section p {
 	font-size: 20px;
 	line-height: 150%;
-  margin-bottom: 25px;
+	margin-bottom: 25px;
 }
 
 @keyframes App-logo-spin {
