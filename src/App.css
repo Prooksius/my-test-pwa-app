@@ -493,6 +493,12 @@ label.navy {
 	line-height: 0;
 }
 
+.page-title__account {
+	display: flex;
+	gap: 15px;
+  align-items: center;
+}
+
 @media screen and (max-width: 991.98px) {
 	.app-sidebar {
 		width: 65px;

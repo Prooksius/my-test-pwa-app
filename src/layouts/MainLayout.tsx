@@ -4,6 +4,7 @@ import { Tooltip } from 'react-tooltip'
 import { Navbar } from '../components/Navbar'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify'
+import { useOktaAuth } from '@okta/okta-react'
 
 interface MainLayoutProps {
 	title: string
@@ -27,6 +28,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, h1 }) => {
 	const [sidebarWide, setSidebarWide] = useState<boolean>(
 		localStorage.getItem('sidebarWide') === '1' ? true : false
 	)
+
+	const { oktaAuth, authState } = useOktaAuth()
+
+	const login = async () => oktaAuth.signInWithRedirect()
+	const logout = async () => oktaAuth.signOut()
 
 	const toggleSidebar = () => {
 		const wide = !sidebarWide
@@ -73,6 +79,22 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, h1 }) => {
 					<div className="page-container">
 						<div className="page-title">
 							<h1 className="page-title__h1">{h1}</h1>
+							<div className="page-title__account">
+								{!authState && 'Loading...'}
+								{!authState?.isAuthenticated && (
+									<button onClick={login} className="btn">Login</button>
+								)}
+								{authState?.isAuthenticated && (
+									<>
+										<span className="name">
+											Welcome {authState.idToken?.claims.name}
+										</span>
+										<button onClick={logout} className="btn">
+											Logout
+										</button>
+									</>
+								)}
+							</div>
 						</div>
 						{children}
 					</div>

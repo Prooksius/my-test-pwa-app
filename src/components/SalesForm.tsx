@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { toastAlert } from '../layouts/MainLayout'
 import { SwitchIcon } from './icons/SwitchIcon'
 import SaleParam from './SaleParam'

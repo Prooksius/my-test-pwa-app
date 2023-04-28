@@ -1,15 +1,16 @@
 import React from 'react'
 import { useOktaAuth } from '@okta/okta-react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { APP_TITLE } from '../App'
 import MainLayout from '../layouts/MainLayout'
 
-const PAGE_TITLE = 'Home'
+const PAGE_TITLE = 'Account'
 
-const Home: React.FC = () => {
+const Account: React.FC = () => {
 	const { oktaAuth, authState } = useOktaAuth()
 
 	const login = async () => oktaAuth.signInWithRedirect()
+	const logout = async () => oktaAuth.signOut()
 
 	return (
 		<MainLayout title={APP_TITLE} h1={PAGE_TITLE}>
@@ -18,19 +19,13 @@ const Home: React.FC = () => {
 				{!authState?.isAuthenticated && (
 					<div>
 						<p>Not Logged in yet</p>
-						<br />
-						<button onClick={login} className="btn btn-blue">
-							Login
-						</button>
+						<button onClick={login}>Login</button>
 					</div>
 				)}
 				{authState?.isAuthenticated && (
 					<div>
-						<p>Welcome {authState.idToken?.claims.name}</p>
-						<br />
-						<p>
-							You can visit <Link to={'/protected/sale'}>Sales</Link> page
-						</p>
+						<p>Logged in! Welcome!</p>
+						<button onClick={logout}>Logout</button>
 					</div>
 				)}
 			</div>
@@ -38,4 +33,4 @@ const Home: React.FC = () => {
 	)
 }
 
-export default Home
+export default Account

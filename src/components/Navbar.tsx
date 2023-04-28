@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
 					</NavLink>
 				</li>
 				<li className="app-navbar__link">
-					<NavLink to={'/sale'}>
+					<NavLink to={'/protected/sale'}>
 						<span
 							className="app-navbar__link-icon"
 							data-tooltip-id="my-tooltip"
