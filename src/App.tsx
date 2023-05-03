@@ -23,7 +23,7 @@ const App: React.FC = () => {
 	const navigate = useNavigate()
   const navigateRef = useRef(navigate)
 
-	// Allow for "stale" navigate  references since originalUri will be an absolute URL.
+	// Allow for "stale" navigate references since originalUri will be an absolute URL.
 	const restoreOriginalUri = useCallback((_: any, originalUri = '/') => {
 		const url = toRelativeUrl(originalUri, globalThis.location.origin)
 		navigateRef.current(url)
